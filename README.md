@@ -8,3 +8,7 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+To build the app in production mode:
+
+### `REACT_APP_NODE_ENV=productuin yarn build`
