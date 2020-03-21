@@ -16,10 +16,16 @@ function ChartController({ lineNameList, showLines, setShowLines, colorMap }) {
   return (
     <div>
       {lineNameList.map(line => (
-        <label key={`${line}-checkbox`} style={{ paddingLeft: '.5em', color: colorMap[line] }}>
-          {line}:
-          <input type="checkbox" checked={showLines.includes(line)} onChange={onChangeLine(line)} />
-        </label>
+        <div style={{ width: '100%', marginTop: '.5em' }}>
+          <label style={{ color: colorMap[line] }} key={`${line}-checkbox`}>
+            {line}:
+            <input
+              type="checkbox"
+              checked={showLines.includes(line)}
+              onChange={onChangeLine(line)}
+            />
+          </label>
+        </div>
       ))}
     </div>
   )

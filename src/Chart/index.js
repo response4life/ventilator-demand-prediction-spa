@@ -38,9 +38,10 @@ function Chart({ lines, setURLParams }) {
   const [showLines, setShowLines] = useState(lineNameList)
 
   return (
-    <div style={{ width: '100%', height: 'auto', marginBottom: '2em', display: 'flex' }}>
-      <div style={{ width: '80%' }}>
+    <div style={{ width: '100%', height: 'auto', display: 'flex', marginBottom: '4em' }}>
+      <div style={{ width: '80%', height: 'auto' }}>
         <VictoryChart
+          padding={{ left: 100, top: 20, right: 20, bottom: 50 }}
           animate={{
             duration: 2000,
             onLoad: { duration: 1000 }
@@ -48,15 +49,15 @@ function Chart({ lines, setURLParams }) {
         >
           {renderLines(lines, showLines, linesColorMap)}
         </VictoryChart>
+      </div>
+      <div style={{ width: '20%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <ChartParameters setURLParams={setURLParams} />
         <ChartController
           lineNameList={lineNameList}
           setShowLines={setShowLines}
           showLines={showLines}
           colorMap={linesColorMap}
         />
-      </div>
-      <div style={{ width: '20%', height: 'auto' }}>
-        <ChartParameters setURLParams={setURLParams} />
       </div>
     </div>
   )
