@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
-import { VictoryLine, VictoryChart } from 'victory'
+import Chart from './Chart'
 
 function App() {
   const [ventilatorData, setVentilatorData] = useState([])
@@ -10,6 +10,7 @@ function App() {
   const [susceptibleData, setSusceptibleData] = useState([])
   const [recoveredData, setRecoveredData] = useState([])
   const [hospitalizedData, setHospitalizedData] = useState([])
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios({
@@ -48,13 +49,15 @@ function App() {
   return (
     <div className="App">
       <div style={{ height: '100%', width: '70%', margin: 'auto' }}>
-        <VictoryChart>
-          <VictoryLine data={ventilatorData} />
-          <VictoryLine data={infectedData} />
-          <VictoryLine data={hospitalizedData} />
-          <VictoryLine data={susceptibleData} />
-          <VictoryLine data={recoveredData} />
-        </VictoryChart>
+        <Chart
+          lines={[
+            { name: 'ventilators demanded', data: ventilatorData },
+            { name: 'infected', data: infectedData },
+            { name: 'hospitalized', data: hospitalizedData },
+            { name: 'susceptible', data: susceptibleData },
+            { name: 'recovered', data: recoveredData }
+          ]}
+        />
       </div>
     </div>
   )
