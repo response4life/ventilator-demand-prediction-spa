@@ -48,17 +48,15 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{ height: '100%', width: '70%', margin: 'auto' }}>
-        <Chart
-          lines={[
-            { name: 'ventilators demanded', data: ventilatorData },
-            { name: 'infected', data: infectedData },
-            { name: 'hospitalized', data: hospitalizedData },
-            { name: 'susceptible', data: susceptibleData },
-            { name: 'recovered', data: recoveredData }
-          ]}
-        />
-      </div>
+      <Chart
+        lines={[
+          { name: 'ventilators demanded', data: ventilatorData },
+          { name: 'infected', data: infectedData },
+          { name: 'hospitalized', data: hospitalizedData },
+          { name: 'susceptible', data: susceptibleData },
+          { name: 'recovered', data: recoveredData }
+        ]}
+      />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { VictoryChart, VictoryLine } from 'victory'
+import { VictoryChart, VictoryLine, VictoryTheme } from 'victory'
 
 import ChartController from './ChartController'
 
@@ -37,8 +37,15 @@ function Chart({ lines }) {
   const [showLines, setShowLines] = useState(lineNameList)
 
   return (
-    <div style={{ height: '100%', width: '90%', margin: 'auto' }}>
-      <VictoryChart>{renderLines(lines, showLines, linesColorMap)}</VictoryChart>
+    <div style={{ width: '80%' }}>
+      <VictoryChart
+        animate={{
+          duration: 2000,
+          onLoad: { duration: 1000 }
+        }}
+      >
+        {renderLines(lines, showLines, linesColorMap)}
+      </VictoryChart>
       <ChartController
         lineNameList={lineNameList}
         setShowLines={setShowLines}
