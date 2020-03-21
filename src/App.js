@@ -6,7 +6,10 @@ import Chart from './Chart'
 import Table from './Table'
 
 const buildUrl = params => {
-  const base = 'http://localhost:5000/'
+  const base =
+    process.env.NODE_ENV === 'production'
+      ? 'https://r4l-ventilator-prediction-api.herokuapp.com/'
+      : 'http://localhost:5000/'
   const url = `${base}?population=${params.population}&initial_infected=${params.initialInfected}&initial_recovered=${params.initialRecovered}&recovery_rate=${params.recoveryRate}&contact_rate=${params.contactRate}&days=${params.days}`
   return url
 }
