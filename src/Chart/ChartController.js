@@ -16,7 +16,7 @@ function ChartController({ lineNameList, showLines, setShowLines, colorMap }) {
   return (
     <div>
       {lineNameList.map(line => (
-        <label style={{ 'padding-left': '.5em', color: colorMap[line] }}>
+        <label key={`${line}-checkbox`} style={{ paddingLeft: '.5em', color: colorMap[line] }}>
           {line}:
           <input type="checkbox" checked={showLines.includes(line)} onChange={onChangeLine(line)} />
         </label>

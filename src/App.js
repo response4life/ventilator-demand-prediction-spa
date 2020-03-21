@@ -3,6 +3,13 @@ import axios from 'axios'
 import './App.css'
 
 import Chart from './Chart'
+import Table from './Table'
+
+const buildUrl = params => {
+  const base = 'http://localhost:5000/'
+  const url = `${base}?population=${params.population}&initial_infected=${params.initialInfected}&initial_recovered=${params.initialRecovered}&recovery_rate=${params.recoveryRate}&contact_rate=${params.contactRate}&days=${params.days}`
+  return url
+}
 
 function App() {
   const [ventilatorData, setVentilatorData] = useState([])
@@ -10,12 +17,21 @@ function App() {
   const [susceptibleData, setSusceptibleData] = useState([])
   const [recoveredData, setRecoveredData] = useState([])
   const [hospitalizedData, setHospitalizedData] = useState([])
+  const [URLParams, setURLParams] = useState({
+    population: 100000,
+    initialInfected: 1,
+    initialRecovered: 0,
+    contactRate: 0.2,
+    recoveryRate: 0.1,
+    days: 160
+  })
+  const [tableData, setTableData] = useState({ headers: [], rows: [] })
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios({
         method: 'get',
-        url: 'http://localhost:5000/'
+        url: buildUrl(URLParams)
       })
       const ventilatorData = result.data.map(day => ({
         x: day.day,
@@ -42,13 +58,25 @@ function App() {
       setHospitalizedData(hospitalizedData)
       setSusceptibleData(susceptibleData)
       setRecoveredData(recoveredData)
+      setTableData({
+        headers: [
+          'day',
+          'ventilators_needed',
+          'infected',
+          'hospitalized',
+          'susceptible',
+          'recovered'
+        ],
+        rows: result.data
+      })
     }
     fetchData()
-  }, [])
+  }, [URLParams])
 
   return (
     <div className="App">
       <Chart
+        setURLParams={setURLParams}
         lines={[
           { name: 'ventilators demanded', data: ventilatorData },
           { name: 'infected', data: infectedData },
@@ -57,6 +85,7 @@ function App() {
           { name: 'recovered', data: recoveredData }
         ]}
       />
+      <Table headers={tableData.headers} rows={tableData.rows} />
     </div>
   )
 }
