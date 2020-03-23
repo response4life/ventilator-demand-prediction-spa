@@ -11,4 +11,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 To build the app in production mode:
 
-### `REACT_APP_NODE_ENV=productuin yarn build`
+### `REACT_APP_NODE_ENV=production yarn build`
